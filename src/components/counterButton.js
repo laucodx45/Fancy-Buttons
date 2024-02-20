@@ -6,7 +6,7 @@ const CounterButton = (props) => {
   
   const increment = () => {
     setClickAmount(clickAmount + 1);
-    props.increaseAnger();
+    props.increaseAnger(0.1);
   }
 
   return (

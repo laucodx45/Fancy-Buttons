@@ -9,9 +9,9 @@ function App() {
   // when not passing param into increaseAnger, no infinite loop
   
   const [angryApp, setAngryApp] = useState(0)
-  const increaseAnger = () => {
+  const increaseAnger = (amount) => {
     if (angryApp < 1) {
-      setAngryApp(angryApp + 0.1);
+      setAngryApp(angryApp + amount);
     } else {
       setAngryApp(0);
     }
@@ -21,7 +21,7 @@ function App() {
   const dark = light === "off" ? 'dark' : '';
   const switchLight = () => {
     light === "off" ? setLight("on") : setLight("off");
-    increaseAnger();
+    increaseAnger(0.1);
   }
 
 

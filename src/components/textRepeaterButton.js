@@ -6,7 +6,7 @@ const TextRepeaterButton = (props) => {
   
   const textRepeaterAction = () => {
     setRepetitions(repetitions + 1);
-    props.increaseAnger();
+    props.increaseAnger(0.1);
   }
   
 
