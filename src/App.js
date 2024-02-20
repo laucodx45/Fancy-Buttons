@@ -4,24 +4,19 @@ import CounterButton from "./components/counterButton";
 import LightSwitchButton from "./components/lightSwitchButton";
 import TextRepeaterButton from "./components/textRepeaterButton"
 import { useState } from 'react';
+import { useReducer } from 'react';
 
 function App() {
-  // when not passing param into increaseAnger, no infinite loop
-  
-  const [angryApp, setAngryApp] = useState(0)
-  const increaseAnger = (amount) => {
-    if (angryApp < 1) {
-      setAngryApp(angryApp + amount);
-    } else {
-      setAngryApp(0);
-    }
-  }
+
+  const [angryApp, dispatch] = useReducer((angryApp, amount) => {
+    return angryApp < 1 ? angryApp + amount : 0;
+  }, 0)
 
   const [light, setLight] = useState("off");
   const dark = light === "off" ? 'dark' : '';
   const switchLight = () => {
     light === "off" ? setLight("on") : setLight("off");
-    increaseAnger(0.1);
+    dispatch(0.1);
   }
 
 
@@ -29,10 +24,10 @@ function App() {
     <div className={`App ${dark}`}>
       <h1>{angryApp < 1 ? "Fancy Buttons!" : "YOU ARE CLIKCING WAY TOO MANY BUTTONS!"}</h1>
       <section>
-        <AngryButton increaseAnger={increaseAnger} angryApp={angryApp}/>
-        <CounterButton increaseAnger={increaseAnger}/>
+        <AngryButton increaseAnger={dispatch} angryApp={angryApp}/>
+        <CounterButton increaseAnger={dispatch}/>
         <LightSwitchButton light={light} switchLight={switchLight}/>
-        <TextRepeaterButton increaseAnger={increaseAnger}/>
+        <TextRepeaterButton increaseAnger={dispatch}/>
       </section>
     </div>
   );
